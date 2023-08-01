@@ -1,0 +1,68 @@
+﻿@inject Nop.Core.IWebHelper webHelper
+@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    var url = httpContextAccessor.HttpContext.Request.Scheme + "://"
+            + httpContextAccessor.HttpContext.Request.Host.ToString() + '/'
+            + httpContextAccessor.HttpContext.Request.Path.ToString().Split('/')[1];
+}
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderBefore })
+<div class="header-upper">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="header-selectors-wrapper">
+                @await Component.InvokeAsync(typeof(TaxTypeSelectorViewComponent))
+                @await Component.InvokeAsync(typeof(CurrencySelectorViewComponent))
+                @await Component.InvokeAsync(typeof(LanguageSelectorViewComponent))
+                @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderSelectors })
+            </div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <div class="header-links-wrapper">
+                @await Component.InvokeAsync(typeof(HeaderLinksViewComponent))
+                @await Component.InvokeAsync(typeof(FlyoutShoppingCartViewComponent))
+            </div>
+        </div>
+    </div>
+</div>
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderMiddle })
+<div class="header-lower">
+    <div class="row align-items-center">
+        <div class="col-2 col-sm-2 col-md-2 d-lg-none d-xl-none">
+            <div class="mobile-menu-icon"><span style="cursor:pointer" class="toggle" onclick="openNav()">&nbsp;</span></div>
+        </div>
+        <div class="logo col-8 col-sm-8 col-md-8 col-lg-4 col-xl-4">
+            <div class="header-logo">
+                @await Component.InvokeAsync(typeof(LogoViewComponent))
+            </div>
+        </div>
+        <div class="col-2 col-sm-2 col-md-2 d-lg-none d-xl-none">
+            <div class="search-icon"></div>
+        </div>
+        <div class="col-lg-8 col-xl-8 s-box">
+            <div class="search-box store-search-box input-group" itemscope itemtype="http://schema.org/WebSite">
+                <meta itemprop="url" content="@url" />
+                <meta itemprop="name" content="RootTheme" />
+                @await Component.InvokeAsync(typeof(SearchBoxViewComponent))
+            </div>
+        </div>
+    </div>
+</div>
+@await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HeaderAfter })
+
+<script asp-location="Footer">
+    $(document).ready(function () {
+        /*js for Search box toogle in mobile */
+        $(".search-icon").click(function () {
+            $(".header-lower .search-box").slideToggle();
+            $(".header-lower .header-links-wrapper").slideUp();
+        });
+
+        /*js to close account links & search when clicked on menu */
+        $("#toggle .menu-icon").click(function () {
+            $(".header-lower .search-box").slideUp();
+            $(".header-lower .header-links-wrapper").slideUp();
+        });
+        console.log($(".footer-powered-by");
+    });
+</script>

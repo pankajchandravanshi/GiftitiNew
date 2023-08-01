@@ -1,0 +1,145 @@
+﻿@model Nop.Web.Models.Catalog.SearchModel
+@{
+    Layout = "_ColumnsTwo";
+
+    //title
+    NopHtml.AddTitleParts(T("PageTitle.Search").Text);
+    //page class
+    NopHtml.AppendPageCssClassParts("html-search-page");
+}
+<script asp-location="Footer">
+    $(document).ready(function () {
+        $("#@Html.IdFor(model => model.advs)").on('click', toggleAdvancedSearch);
+        toggleAdvancedSearch();
+    });
+
+    function toggleAdvancedSearch() {
+        if ($('#@Html.IdFor(model => model.advs)').is(':checked')) {
+            $('#advanced-search-block').show();
+        }
+        else {
+            $('#advanced-search-block').hide();
+        }
+    }
+</script>
+@section CatalogFilters {
+    @await Html.PartialAsync("_CatalogFilters", Model.CatalogProductsModel)
+}
+<div class="page search-page">
+    <div class="page-title">
+        <h1>@T("Search")</h1>
+    </div>
+    <div class="page-body">
+        <div class="search-input">
+            <form asp-route="ProductSearch" method="get">
+                <div class="fieldset">
+                    <div class="form-fields">
+                        <div class="basic-search">
+                            <div class="inputs form-group row">
+                                <label asp-for="q" class="col-form-label col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">@T("Search.SearchTerm"):</label>
+                                <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                                    <input asp-for="q" class="search-text form-control" />
+                                </div>
+                            </div>
+                            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductSearchPageBasic, additionalData = Model })
+                            <div class="reversed form-group">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 offset-md-4 col-md-8 offset-lg-4 col-lg-8 offset-xl-4 col-xl-8">
+                                        <div class="custom-control custom-checkbox text-left">
+                                            <input asp-for="advs" type="checkbox" class="custom-control-input form-control" id="advs" />
+                                            <label class="custom-control-label" asp-for="advs" for="advs">@T("Search.AdvancedSearch")</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="advanced-search" id="advanced-search-block">
+                            @if (Model.AvailableCategories.Count > 0)
+                            {
+                            <div class="inputs form-group row">
+                                <label asp-for="cid" class="col-form-label col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">@T("Search.Category"):</label>
+                                <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                                    <select asp-for="cid" class="form-control" asp-items="Model.AvailableCategories"></select>
+                                </div>
+                            </div>
+                            <div class="reversed form-group">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 offset-md-4 col-md-8 offset-lg-4 col-lg-8 offset-xl-4 col-xl-8">
+                                        <div class="custom-control custom-checkbox text-left">
+                                            <input asp-for="isc" type="checkbox" class="custom-control-input form-control" id="isc" />
+                                            <label class="custom-control-label" asp-for="isc" for="isc">@T("Search.IncludeSubCategories")</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                            @if (Model.AvailableManufacturers.Count > 0)
+                            {
+                            <div class="inputs form-group row">
+                                <label asp-for="mid" class="col-form-label col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">@T("Search.Manufacturer"):</label>
+                                <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                                    <select asp-for="mid" class="form-control" asp-items="Model.AvailableManufacturers"></select>
+                                </div>
+                            </div>
+                            }
+                            @if (Model.asv && Model.AvailableVendors.Count > 0)
+                            {
+                            <div class="inputs form-group row">
+                                <label asp-for="vid" class="col-form-label col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">@T("Search.Vendor"):</label>
+                                <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5">
+                                    <select asp-for="vid" class="form-control" asp-items="Model.AvailableVendors"></select>
+                                </div>
+                            </div>
+                            }
+                            <div class="reversed form-group">
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 offset-md-4 col-md-8 offset-lg-4 col-lg-8 offset-xl-4 col-xl-8">
+                                        <div class="custom-control custom-checkbox text-left">
+                                            <input asp-for="sid" type="checkbox" class="custom-control-input form-control" id="sid" />
+                                            <label class="custom-control-label" asp-for="sid" for="sid">@T("Search.SearchInDescriptions")</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductSearchPageAdvanced, additionalData = Model })
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons">
+                <button type="submit" class="button-1 btn btn-primary search-button">@T("Search.Button")</button>
+                </div>
+            </form>
+        </div>
+        @await Html.PartialAsync("_CatalogSelectors", Model.CatalogProductsModel)
+
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductSearchPageBeforeResults, additionalData = Model })
+        <div class="search-results">
+            @{
+                var catalogProductsViewData = new ViewDataDictionary(ViewData);
+                catalogProductsViewData["fetchUrl"] = Html.Raw(Url.Action("SearchProducts", "Catalog"));
+            }
+            @await Html.PartialAsync("_CatalogProducts", Model.CatalogProductsModel, catalogProductsViewData)
+            <script asp-location="Footer">
+                $(document).ready(function () {
+                    $(CatalogProducts).on('before', function (e) {
+                        var isAdvanced = $('#@Html.IdFor(model => model.advs)').is(':checked');
+
+                        e.payload.urlBuilder
+                            .addParameter('q', $('#@Html.IdFor(model => model.q)').val())
+                            .addParameter('advs', isAdvanced);
+
+                        if (isAdvanced) {
+                            e.payload.urlBuilder
+                                .addParameter('cid', $('#@Html.IdFor(model => model.cid)').val())
+                                .addParameter('isc', $('#@Html.IdFor(model => model.isc)').is(':checked'))
+                                .addParameter('mid', $('#@Html.IdFor(model => model.mid)').val())
+                                .addParameter('vid', $('#@Html.IdFor(model => model.vid)').val())
+                                .addParameter('sid', $('#@Html.IdFor(model => model.sid)').is(':checked'));
+                        }
+                    });
+                });
+            </script>
+        </div>
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.ProductSearchPageAfterResults, additionalData = Model })
+    </div>
+</div>
