@@ -33,10 +33,11 @@
         @await Component.InvokeAsync(typeof(HomepageProductsViewComponent))
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforeBestSellers })
         @await Component.InvokeAsync(typeof(HomepageBestSellersViewComponent))
-        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforeNews })
+       @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforeNews })
         @await Component.InvokeAsync(typeof(HomepageNewsViewComponent))
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforePoll })
         @await Component.InvokeAsync(typeof(HomepagePollsViewComponent))
+        <div>Pankaj Chandravanshi</div>
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBottom })
     </div>
 </div>

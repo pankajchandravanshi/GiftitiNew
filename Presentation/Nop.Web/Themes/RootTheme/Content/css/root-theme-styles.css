@@ -934,7 +934,7 @@ label, label + * {
 }
 
 .header-logo a img {
-    max-width: 100%;
+    max-width: 40%;
     opacity: 1;
 }
 
@@ -943,7 +943,7 @@ label, label + * {
 }
 
 .search-box form:after {
-    content: "";
+    content: "";  
     display: block;
     clear: both;
 }
