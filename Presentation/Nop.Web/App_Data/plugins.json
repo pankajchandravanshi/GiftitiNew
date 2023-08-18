@@ -82,6 +82,14 @@
     {
       "SystemName": "ExternalAuth.Facebook",
       "Version": "1.80"
+    },
+    {
+      "SystemName": "NopAdvance.Core",
+      "Version": "1.12"
+    },
+    {
+      "SystemName": "NopAdvance.Plugin.ExpressCartWishlist",
+      "Version": "1.0"
     }
   ],
   "PluginNamesToUninstall": [],

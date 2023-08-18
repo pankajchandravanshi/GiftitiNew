@@ -1,7 +1,58 @@
 ﻿@model IList<CategoryModel>
 
 @using Nop.Core.Domain.Catalog
+<style>
+    .container-Gifts {
+    width: 100%;
+    max-width: 1440px;
+    position: relative;
+    background: linear-gradient(98deg, #F5F4F9 0%, #DDDEE2 100%);
+    margin: 0 auto;
+}
 
+.title-container-Gifts {
+    text-align: center;
+    color: #16332F;
+    font-size: 4.5vw; /* Responsive font size */
+    font-family: "Playfair Display", serif;
+    font-weight: 600;
+    line-height: 1.2;
+    word-wrap: break-word;
+    padding: 20px;
+}
+
+.subtitle-Gifts {
+    text-align: center;
+    color: #16332F;
+    font-size: 1.5vw; /* Responsive font size */
+    font-weight: 400;
+    line-height: 1.5;
+    word-wrap: break-word;
+    padding: 20px;
+}
+
+.image-container-Gifts {
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.image-Gifts {
+    width: 30%;
+    max-width: 360.22px;
+    height: auto;
+    position: relative;
+    transform: rotate(-2.99deg);
+    transform-origin: 0 0;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.25);
+    margin: 0 1%;
+}
+
+ 
+}
+</style>
 @if (Model.Count > 0)
 {
     <div class="category-grid home-page-category-grid">
@@ -10,10 +61,10 @@
         </div>
         <div class="item-grid">
             <div class="row">
-              
+
                 @foreach (var item in Model)
                 {
-                    <div class="item-box card col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                    <div class="item-box card col-12 col-sm-6 col-md-3 col-lg-4 col-xl-3">
                         <div class="category-item card-block">
 
 
@@ -30,6 +81,22 @@
                         </div>
                     </div>
                 }
+            </div>
+            @* Add code for gift that brings you happinaess *@
+            <div class="row">
+                <div class="container-Gifts">
+                    <div class="title-container-Gifts">
+                        <div class="title-Gifts">Gifts that Bring Happiness</div>
+                        <div class="subtitle-Gifts">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</div>
+                    </div>
+                    <div class="image-container-Gifts">
+                        <img class="image-Gifts" src="https://via.placeholder.com/360x325" alt="Placeholder Image">
+                        <img class="image-Gifts" src="https://via.placeholder.com/360x325" alt="Placeholder Image">
+                        <img class="image-Gifts" src="https://via.placeholder.com/360x325" alt="Placeholder Image">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
             </div>
         </div>
     </div>
