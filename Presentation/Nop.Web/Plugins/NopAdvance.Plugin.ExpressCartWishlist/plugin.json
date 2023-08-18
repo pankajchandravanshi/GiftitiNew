@@ -1,0 +1,15 @@
+{
+  "Group": "NopAdvance",
+  "FriendlyName": "NopAdvance Express Cart and Wishlist",
+  "SystemName": "NopAdvance.Plugin.ExpressCartWishlist",
+  "Version": "1.0",
+  "SupportedVersions": [ "4.60" ],
+  "Author": "NopAdvance team",
+  "DisplayOrder": 1,
+  "FileName": "NopAdvance.Plugin.Utility.ExpressCartWishlist.dll",
+  "Description": "This plugin allows you to display a popup notification after the products are added to Shopping Cart or Wishlist.",
+  "DependsOnSystemNames": [ "NopAdvance.Core" ],
+  "CoreVersion": "1.12",
+  "ProductUrl": "https://store.nopadvance.com/express-cart-and-wishlist-nopcommerce-plugin",
+  "HelpUrl": "https://docs.nopadvance.com/Expresscartandwishlist-nopcommer.html"
+}

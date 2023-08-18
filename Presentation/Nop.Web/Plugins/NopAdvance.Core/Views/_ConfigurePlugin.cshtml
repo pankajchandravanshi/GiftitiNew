@@ -1,0 +1,48 @@
+﻿@using NopAdvance.Plugin.Core.Infrastructure
+@using NopAdvance.Plugin.Core.Helpers
+@using NopAdvance.Plugin.Core.Domain
+@inject IGenericHelper genericHelper
+@{
+    var pluginDescriptor = genericHelper.GetPluginDescriptor(ViewBag.SystemName);
+
+    //friendly name
+    var friendlyName = pluginDescriptor?.FriendlyName;
+
+    Layout = "_AdminLayout";
+    //page title
+    ViewBag.PageTitle = T(CoreLocaleResourceDefaults.CONFIGURE_PAGE_TITLE).Text + " - " + friendlyName;
+
+    var pluginStatus = (PluginLicenceStatusType)ViewBag.PluginStatus;
+
+    var supportLink = await genericHelper.GetContactSupportLinkAsync(friendlyName);
+    var salesLink = await genericHelper.GetContactSalesLinkAsync();
+}
+<div class="content-header clearfix">
+    <h1 class="float-left">
+        @switch (pluginStatus)
+        {
+            case PluginLicenceStatusType.Registered:
+            case PluginLicenceStatusType.Free:
+                <i class="fas fa-check-circle text-green"></i>
+                break;
+            case PluginLicenceStatusType.Trial:
+                <i class="fas fa-exclamation-triangle text-yellow"></i>
+                break;
+            case PluginLicenceStatusType.Expired:
+                <i class="fas fa-times-circle text-red"></i>
+                break;
+        }
+        @T(CoreLocaleResourceDefaults.CONFIGURE_PAGE_TITLE) - @friendlyName
+    </h1>
+    <div class="float-right">
+        <a class="btn btn-primary" href="@supportLink">@T(CoreLocaleResourceDefaults.CONTACT_SUPPORT)</a>
+        <a class="btn bg-olive" href="@salesLink">@T(CoreLocaleResourceDefaults.CONTACT_SALES)</a>
+    </div>
+</div>
+<section class="content">
+    <div class="container-fluid">
+        <div class="form-horizontal">
+            @RenderBody()
+        </div>
+    </div>
+</section>

@@ -1,0 +1,160 @@
+@*
+    // ***	 ** ****** ****** ****** ******* **     ** ****** ***   ** **** ****
+    // ****  ** **  ** **  ** **  **  **  **  **   **  **  ** ****  ** *    *
+    // ** ** ** **  ** ****** ******  **  **   ** **   ****** ** ** ** *    ***
+    // **  **** **  ** **	  **  **  **  **    ***    **  ** **  **** *    *
+    // **   *** ****** **	  **  ** *******     *     **  ** **   *** **** ****
+    //
+    // **************************************************************************
+    // *                                                                		*
+	// *   NopAdvance Express Cart and Wishlist Plugin by NopAdvance team       *
+    // *			Copyright (c) NopAdvance LLP. All Rights Reserved			*
+    // *                                                                       	*
+    // **************************************************************************
+    // *                                                                       	*
+    // * Email:		contact@nopadvance.com										*
+    // * Website:	https://nopadvance.com										*
+    // *                                                                       	*
+    // **************************************************************************
+    // *                                                                       	*
+    // * Please see the  License file for the full End User License Agreement. 	*
+    // * The  complete license agreement is also available on  our  website at 	*
+    // * https://nopadvance.com/license-terms									*
+    // *                                                                       	*
+    // * This  software / plugin  is furnished  under a license  and  may   be  *
+    // * used  and modified  only in accordance with the terms of such license  *
+    // * and with the inclusion of the above copyright notice.  This  software	*
+    // * or any other copies thereof may not be  provided  or  otherwise  made	*
+    // * available  to any other person.  No title to  and  ownership  of  the  *
+    // * software is hereby transferred.                                        *
+    // *                                                                       	*
+    // * You may not reverse  engineer, decompile, defeat  license  encryption 	*
+    // * mechanisms  or  disassemble this software product or software product 	*
+    // * license.  NopAdvance may terminate this  license if you don't  comply 	*
+    // * with any of the terms & conditions set forth in our  end user license	*
+    // * agreement (EULA).  In such event , licensee agrees to return licensor	*
+    // * or destroy  all copies of software  upon termination  of the license.	*
+    // *                                                                       	*
+    // **************************************************************************
+*@
+@model ExpressCartWishlistSettings
+@{
+    Layout = "";
+    var Quantity = 1;
+    var themeCssPath = await EngineContext.Current.Resolve<IThemeHelper>().GetThemeCssPathAsync(PluginDefaults.SYSTEM_NAME);
+    var themeJsPath = await EngineContext.Current.Resolve<IThemeHelper>().GetThemeJsPathAsync(PluginDefaults.SYSTEM_NAME);
+    NopHtml.AddCssFileParts($"{themeCssPath}/ExpressStyle.css");
+    NopHtml.AddScriptParts(Nop.Web.Framework.UI.ResourceLocation.Footer,$"{themeJsPath}/expresscartwishlist.popup.js");
+}
+
+<link rel="stylesheet" href="~/lib_npm/magnific-popup/magnific-popup.css" />
+<script asp-exclude-from-bundle="true" src="~/lib_npm/magnific-popup/jquery.magnific-popup.min.js" asp-location="Footer"></script>
+
+<script asp-location="Footer">
+
+    $(document).ready(function() {
+
+        // Create popup for express cart and wishlist
+        if ($("#open-express-popup").length <= 0) {
+            var popup = '<div class="express-popup">' +
+                '<a href="#express-popup" id="open-express-popup" class="open-express-popup" data-effect="express-popup-zoom-in"></a>' +
+                '<div id="express-popup" class="express-popup mfp-with-anim mfp-hide">' +
+                '</div>' +
+                '</div>';
+            $('body').append(popup);
+        }
+
+        ExpressCartWishlist.init(false, "#open-express-popup", "#express-popup");
+
+        if (@Model.ExpressCartEnabled.ToString().ToLower()) {
+            //Remove default on click function from productbox and product detail cart button
+            $("@Model.ProductBoxAddToCartButtonSelector").removeAttr("onclick");
+            $("@Model.ProductPageAddToCartButtonSelector").removeAttr("onclick");
+
+            //Ajax call on product box add to cart button click
+            $("@Model.ProductBoxAddToCartButtonSelector").click(function(event) {
+                event.preventDefault();
+
+                // Get product item element
+                var productItem = $(this).closest("@Model.ProductBoxProductItemElementSelector");
+
+                // Get product id from product item
+                var productId = productItem.data("productid");
+
+                // Set post data
+                var postData = { "productId": productId, "shoppingCartTypeId": @((int)ShoppingCartType.ShoppingCart), "quantity": @Quantity }
+
+                var getCartUrl = "@(Url.Action("GetCartItem","NopAdvanceExpressCartWishlist"))?productId=" + productId + "&shoppingCartTypeId=@((int)ShoppingCartType.ShoppingCart)";
+
+                //Call ajax fuction for add product into cart
+                ExpressCartWishlist.addproducttocart_catalog("@(Url.Action("AddProductToCart_Catalog","ShoppingCart"))",getCartUrl, postData)
+            });
+
+            //Ajax call on product details page add to cart button click
+            $("@Model.ProductPageAddToCartButtonSelector").click(function(event) {
+                event.preventDefault();
+
+                // Get product id from product item
+                var productId = $(this).data("productid");
+
+                // Set form selector
+                ExpressCartWishlist.formselector = '#product-details-form';
+
+                var getCartUrl = "@(Url.Action("GetCartItem","NopAdvanceExpressCartWishlist"))?productId=" + productId + "&shoppingCartTypeId=@((int)ShoppingCartType.ShoppingCart)";
+
+                // Call ajax fuction for add product into cart
+                ExpressCartWishlist.addproducttocart_details("@(Url.Action("AddProductToCart_Details","ShoppingCart"))?productId=" + productId + "&shoppingCartTypeId=@((int)ShoppingCartType.ShoppingCart)",getCartUrl);
+            });
+        }
+
+        if (@Model.ExpressWishlistEnabled.ToString().ToLower()) {
+            //Remove defualt on click function from productbox and product detail wishlist button
+            $("@Model.ProductAddToWishlistButtonSelector").removeAttr("onclick");
+
+            //Ajax call on add to wishlist button click
+            $("@Model.ProductAddToWishlistButtonSelector").click(function(event) {
+                event.preventDefault();
+
+                // Get product item element
+                var productItem = $(this).closest("@Model.ProductBoxProductItemElementSelector");
+
+                // Get product id from product item
+                var productBoxId = productItem.data("productid");
+                
+                if (productBoxId != undefined || $("#product-details-form").length <= 0) {
+                    // Set post data
+                    var postData = { "productId": productBoxId, "shoppingCartTypeId": @((int)ShoppingCartType.Wishlist), "quantity": @Quantity }
+
+                    var getCartUrl = "@(Url.Action("GetCartItem","NopAdvanceExpressCartWishlist"))?productId=" + productBoxId + "&shoppingCartTypeId=@((int)ShoppingCartType.Wishlist)";
+
+                    //Call ajax fuction for add product into wishlist from product box
+                    ExpressCartWishlist.addproducttocart_catalog("@(Url.Action("AddProductToCart_Catalog","ShoppingCart"))",getCartUrl, postData)
+                } else {
+                    // Set form selector
+                    ExpressCartWishlist.formselector = '#product-details-form';
+
+                    var getCartUrl = "@(Url.Action("GetCartItem","NopAdvanceExpressCartWishlist"))?productId=" + $(this).data("productid") + "&shoppingCartTypeId=@((int)ShoppingCartType.Wishlist)";
+
+                    //Call ajax fuction for add product into wishlist from product details page
+                    ExpressCartWishlist.addproducttocart_details("@(Url.Action("AddProductToCart_Details","ShoppingCart"))?productId=" + $(this).data("productid") + "&shoppingCartTypeId=@((int)ShoppingCartType.Wishlist)",getCartUrl);
+                }
+            });
+        }
+        $("#open-express-popup").magnificPopup({
+            type: 'inline',
+            removalDelay: 500,
+            callbacks: {
+                beforeOpen: function() {
+                    this.st.mainClass = this.st.el.attr('data-effect');
+                },
+                open: function() {
+
+                },
+                close: function() {
+                    window.location.reload();
+                }
+            }
+        });
+    });
+
+</script>

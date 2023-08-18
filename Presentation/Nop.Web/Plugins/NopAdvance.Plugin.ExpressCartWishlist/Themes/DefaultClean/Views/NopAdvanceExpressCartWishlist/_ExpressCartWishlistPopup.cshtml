@@ -1,0 +1,127 @@
+@*
+    // ***	 ** ****** ****** ****** ******* **     ** ****** ***   ** **** ****
+    // ****  ** **  ** **  ** **  **  **  **  **   **  **  ** ****  ** *    *
+    // ** ** ** **  ** ****** ******  **  **   ** **   ****** ** ** ** *    ***
+    // **  **** **  ** **	  **  **  **  **    ***    **  ** **  **** *    *
+    // **   *** ****** **	  **  ** *******     *     **  ** **   *** **** ****
+    //
+    // **************************************************************************
+    // *                                                                		*
+	// *   NopAdvance Express Cart and Wishlist Plugin by NopAdvance team       *
+    // *			Copyright (c) NopAdvance LLP. All Rights Reserved			*
+    // *                                                                       	*
+    // **************************************************************************
+    // *                                                                       	*
+    // * Email:		contact@nopadvance.com										*
+    // * Website:	https://nopadvance.com										*
+    // *                                                                       	*
+    // **************************************************************************
+    // *                                                                       	*
+    // * Please see the  License file for the full End User License Agreement. 	*
+    // * The  complete license agreement is also available on  our  website at 	*
+    // * https://nopadvance.com/license-terms									*
+    // *                                                                       	*
+    // * This  software / plugin  is furnished  under a license  and  may   be  *
+    // * used  and modified  only in accordance with the terms of such license  *
+    // * and with the inclusion of the above copyright notice.  This  software	*
+    // * or any other copies thereof may not be  provided  or  otherwise  made	*
+    // * available  to any other person.  No title to  and  ownership  of  the  *
+    // * software is hereby transferred.                                        *
+    // *                                                                       	*
+    // * You may not reverse  engineer, decompile, defeat  license  encryption 	*
+    // * mechanisms  or  disassemble this software product or software product 	*
+    // * license.  NopAdvance may terminate this  license if you don't  comply 	*
+    // * with any of the terms & conditions set forth in our  end user license	*
+    // * agreement (EULA).  In such event , licensee agrees to return licensor	*
+    // * or destroy  all copies of software  upon termination  of the license.	*
+    // *                                                                       	*
+    // **************************************************************************
+*@
+@model ExpressCartWishlistItemModel
+@{
+    var imgWidth = Model.ImageSize + "px";
+}
+<div>
+    <div class="popup-header">
+        @if (Model.ShoppingCartTypeId == (int)ShoppingCartType.ShoppingCart)
+        {
+            <span>@T(LocaleResourceDefaults.EXPRESS_CART_WISHLIST_POPUP_CART_TITLE).Text</span>
+        }
+        else
+        {
+            <span>@T(LocaleResourceDefaults.EXPRESS_CART_WISHLIST_POPUP_WISHLIST_TITLE).Text</span>
+        }
+    </div>
+    <div class="product-essential">
+        <div class="gallery">
+            <div class="picture">
+                <a href="@Url.RouteUrl("Product", new { SeName = Model.ProductSeName })" title="@Model.Picture.Title">
+                    @if(Model.ImageSize > 0)
+                    {
+                        <img alt="@Model.Picture.AlternateText" width="@Model.ImageSize" height="@Model.ImageSize" src="@Model.Picture.ImageUrl" title="@Model.Picture.Title" />
+                    }
+                    else
+                    {
+                        <img alt="@Model.Picture.AlternateText" width="400" height="400" src="@Model.Picture.ImageUrl" title="@Model.Picture.Title" />
+                    }
+                    </a>
+            </div>
+        </div>
+
+        <div class="overview">
+            <div class="product-name">
+                <h1>
+                    <a href="@Url.RouteUrl("Product", new {SeName = Model.ProductSeName})">@Model.ProductName</a>
+                </h1>
+            </div>
+            <div class="prices">
+                <div class="product-price">
+                    <span>
+                        @Model.UnitPrice
+                    </span>
+                </div>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.AttributeInfo))
+            {
+                <div class="express-cart-item">
+                    @Html.Raw(Model.AttributeInfo)
+                </div>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.RecurringInfo))
+            {
+                <div class="express-cart-item">
+                    @Html.Raw(Model.RecurringInfo)
+                </div>
+            }
+            @if (!string.IsNullOrWhiteSpace(Model.RentalInfo))
+            {
+                <div class="express-cart-item">
+                    @Html.Raw(Model.RentalInfo)
+                </div>
+            }
+            <div class="express-cart-item">
+                <span>@T(LocaleResourceDefaults.EXPRESS_CART_WISHLIST_POPUP_QUANTITY) : @Model.Quantity</span>
+            </div>
+
+        </div>
+    </div>
+    <div class="text-center button-expresscart">
+        <input type="submit" class="continueshoppingbtn" onclick="window.location.reload()" value="@T(LocaleResourceDefaults.EXPRESS_CART_WISHLIST_POPUP_CONTINUE_SHOPPING_BUTTON)" />
+    </div>
+    <div class="text-center button-expresscart">
+        @if (Model.ShoppingCartTypeId == (int)ShoppingCartType.ShoppingCart)
+        {
+            <input type="submit" class="shoppingcartbutton" onclick="setLocation('@Url.RouteUrl("ShoppingCart")')" value="@T(LocaleResourceDefaults.EXPRESS_CART_WISHLIST_POPUP_GOTOCART_BUTTON)" />
+        }
+        else
+        {
+            <input type="submit" class="shoppingcartbutton" onclick="setLocation('@Url.RouteUrl("Wishlist")')" value="@T(LocaleResourceDefaults.EXPRESS_CART_WISHLIST_POPUP_GOTOWISHLIST_BUTTON)" />
+        }
+    </div>
+</div>
+
+<style>
+   .express-popup .gallery, .express-popup .gallery .picture {
+        width:@imgWidth;
+    }
+</style>

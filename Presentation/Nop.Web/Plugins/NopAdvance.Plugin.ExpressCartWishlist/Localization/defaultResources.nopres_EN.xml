@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Language Name="English">
+	<LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist">
+		<Value>Express cart and wishlist</Value>
+	</LocaleResource>
+	<!--Configuration-->
+	<LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure">
+		<Value>Configure</Value>
+	</LocaleResource>
+	<LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Help">
+		<Value>Help</Value>
+	</LocaleResource>
+	<LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Info">
+		<Value>Note:In order to use this functionality, you have to disable the following setting: Shopping cart settings > Display cart after adding a product and Display wishlist after adding a product.</Value>
+	</LocaleResource>
+	<LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.Enabled">
+		<Value>Enabled</Value>
+	</LocaleResource>
+	<LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.Enabled.Hint">
+		<Value>Check/uncheck to enable/disable this plugin.</Value>
+	</LocaleResource>
+	<LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ExpressCartEnabled">
+        <Value>Enabled express cart</Value>
+	</LocaleResource>
+	<LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ExpressCartEnabled.Hint">
+        <Value>Check/uncheck to enable/disable this plugin on "Add To Cart".</Value>
+	</LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ExpressWishlistEnabled">
+        <Value>Enabled express wishlist</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ExpressWishlistEnabled.Hint">
+        <Value>Check/uncheck to enable/disable this plugin on "Add To Wishlist".</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductPageAddToCartButtonSelector">
+        <Value>Product page "Add To Cart" button selector</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductPageAddToCartButtonSelector.Hint">
+        <Value>The selector for the product page "Add To Cart" button on the product details page.</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductBoxProductItemElementSelector">
+        <Value>Product box product item element selector</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductBoxProductItemElementSelector.Hint">
+        <Value>This selector for the product item element within the product box holds the ID of the product.</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductBoxAddToCartButtonSelector">
+        <Value>Product box "Add To Cart" button selector</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductBoxAddToCartButtonSelector.Hint">
+        <Value>The selector for the product box "Add To Cart" button. The product box is used for listing products on pages.</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductAddToWishlistButtonSelector">
+        <Value>"Add To Wishlist" button selector</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductAddToWishlistButtonSelector.Hint">
+        <Value>The selector for the "Add To Wishlist" button.</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductAddToCartWishlistImageSize">
+        <Value>Product added to cart and wishlist image size</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Admin.Configure.Fields.ProductAddToCartWishlistImageSize.Hint">
+        <Value>Specify the image size of the image displayed on the product added to cart and wishlist popup.</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Popup.Cart.Title">
+        <Value>Just added to your cart</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Popup.Wishlist.Title">
+        <Value>Just added to your wishlist</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Popup.Quantity">
+        <Value>Quantity</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Popup.ContinueShopping.Button">
+        <Value>Continue Shopping</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Popup.GoToCart.Button">
+        <Value>Go To Cart</Value>
+    </LocaleResource>
+    <LocaleResource Name="NopAdvance.Plugin.ExpressCartWishlist.Popup.GoToWishlist.Button">
+        <Value>Go To Wishlist</Value>
+    </LocaleResource>
+</Language>
