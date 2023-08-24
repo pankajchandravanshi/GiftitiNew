@@ -1,11 +1,55 @@
 ﻿@using Nop.Services.Localization
 @using Nop.Core
+<style>
+    .choose-container {
+        width: 100%;
+        position: relative;
+        background: #F2F2F2;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .choose-title1 {
+        text-align: center;
+        color: #16332F;
+        font-size: 52px;
+        font-family: Playfair Display;
+        font-weight: 600;
+        line-height: 72.80px;
+        word-wrap: break-word;
+        margin-top: 10px;
+    }
+
+    .choose-title {
+        font-size: 24px;
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        color: #16332F;
+        line-height: 1.2;
+        margin-bottom: 10px;
+    }
+
+    .choose-description {
+        font-family: 'Work Sans', sans-serif;
+        font-weight: 400;
+        color: #16332F;
+        line-height: 1.4;
+    }
+
+    
+    /* Custom CSS for the row */
+    .choose-row {
+        margin-top: 20px;
+        align-items: center;
+        text-align: center;
+    }
+</style>
 @inject ILocalizationService localizationService
 @inject IStoreContext storeContext
 @{
     Layout = "_ColumnsOne";
     var homepageTitle = await localizationService.GetLocalizedAsync(await storeContext.GetCurrentStoreAsync(), s => s.HomepageTitle);
-    
+
     //title
     if (!string.IsNullOrEmpty(homepageTitle))
     {
@@ -33,12 +77,32 @@
         @await Component.InvokeAsync(typeof(HomepageProductsViewComponent))
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforeBestSellers })
         @await Component.InvokeAsync(typeof(HomepageBestSellersViewComponent))
-       @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforeNews })
+        @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforeNews })
         @await Component.InvokeAsync(typeof(HomepageNewsViewComponent))
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBeforePoll })
         @await Component.InvokeAsync(typeof(HomepagePollsViewComponent))
-        <div>Pankaj Chandravanshi</div>
+        <div class="choose-container">
+            <div class="choose-title1">Why choose Giftiti</div>
+            <div class="row choose-row">
+                <div class="col-lg-4 choose-description">
+                    <img width="65" height="65" src="~/images/samples/icons8-shipping-100.png" alt="in-transit--v1" />
+                    <div class="choose-title">We ship across the entire US</div>
+                    <div class="description">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document</div>
+
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4 choose-description">
+                    <img width="65" height="65" src="~/images/samples/icons8-support-100.png" alt="in-transit--v1" />
+                    <div class="choose-title">International shipping</div>
+                    <div class="description">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document</div>
+                </div><!-- /.col-lg-4 -->
+                <div class="col-lg-4 choose-description">
+                    <img width="65" height="65" src="~/images/samples/icons8-earth-100.png" alt="in-transit--v1" />
+                    <div class="choose-title">Great customer service</div>
+                    <div class="description">In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document</div>
+                </div><!-- /.col-lg-4 -->
+            </div>
+        </div>
+
         @await Component.InvokeAsync(typeof(WidgetViewComponent), new { widgetZone = PublicWidgetZones.HomepageBottom })
     </div>
 </div>
-    

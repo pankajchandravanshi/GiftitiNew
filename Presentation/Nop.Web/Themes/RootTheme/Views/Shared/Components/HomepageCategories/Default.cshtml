@@ -50,8 +50,164 @@
     margin: 0 1%;
 }
 
- 
-}
+    .grid {
+        position: relative;
+        margin: 0 auto;
+        padding: 1em 0 4em;
+        max-width: 1000px;
+        list-style: none;
+        text-align: center;
+    }
+
+        .grid figure {
+            position: relative;
+            float: left;
+            overflow: hidden;
+            margin: 10px 1%;
+            min-width: 320px;
+            max-width: 480px;
+            max-height: 360px;
+            width: 48%;
+            background: #3085a3;
+            text-align: center;
+            cursor: pointer;
+        }
+
+            .grid figure img {
+                position: relative;
+                display: block;
+                min-height: 100%;
+                max-width: 100%;
+                opacity: 0.8;
+            }
+
+            .grid figure figcaption {
+                padding: 2em;
+                color: #fff;
+                text-transform: uppercase;
+                font-size: 1.25em;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+            }
+
+                .grid figure figcaption::before,
+                .grid figure figcaption::after {
+                    pointer-events: none;
+                }
+
+                .grid figure figcaption,
+                .grid figure figcaption > a {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+    /*---------------*/
+    /***** Layla *****/
+    /*---------------*/
+
+    figure.effect-layla {
+        background: #dae0de;
+    }
+
+        figure.effect-layla img {
+            height: 390px;
+        }
+
+        figure.effect-layla figcaption {
+            padding: 3em;
+        }
+
+            figure.effect-layla figcaption::before,
+            figure.effect-layla figcaption::after {
+                position: absolute;
+                content: '';
+                opacity: 0;
+            }
+
+            figure.effect-layla figcaption::before {
+                top: 50px;
+                right: 30px;
+                bottom: 50px;
+                left: 30px;
+                border-top: 1px solid #fff;
+                border-bottom: 1px solid #fff;
+                -webkit-transform: scale(0, 1);
+                transform: scale(0, 1);
+                -webkit-transform-origin: 0 0;
+                transform-origin: 0 0;
+            }
+
+            figure.effect-layla figcaption::after {
+                top: 30px;
+                right: 50px;
+                bottom: 30px;
+                left: 50px;
+                border-right: 1px solid #fff;
+                border-left: 1px solid #fff;
+                -webkit-transform: scale(1, 0);
+                transform: scale(1, 0);
+                -webkit-transform-origin: 100% 0;
+                transform-origin: 100% 0;
+            }
+
+        figure.effect-layla h2 {
+            padding-top: 26%;
+            -webkit-transition: -webkit-transform 0.35s;
+            transition: transform 0.35s;
+        }
+
+        figure.effect-layla p {
+            padding: 5.5em 2em;
+            text-transform: none;
+            opacity: 0;
+            -webkit-transform: translate3d(0, -10px, 0);
+            transform: translate3d(0, -10px, 0);
+        }
+
+        figure.effect-layla img,
+        figure.effect-layla h2 {
+            -webkit-transform: translate3d(0, -30px, 0);
+            transform: translate3d(0, -30px, 0);
+        }
+
+        figure.effect-layla img,
+        figure.effect-layla figcaption::before,
+        figure.effect-layla figcaption::after,
+        figure.effect-layla p {
+            -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+            transition: opacity 0.35s, transform 0.35s;
+        }
+
+        figure.effect-layla:hover img {
+            opacity: 0.7;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        figure.effect-layla:hover figcaption::before,
+        figure.effect-layla:hover figcaption::after {
+            opacity: 1;
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+
+        figure.effect-layla:hover h2,
+        figure.effect-layla:hover p {
+            opacity: 1;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+
+        figure.effect-layla:hover figcaption::after,
+        figure.effect-layla:hover h2,
+        figure.effect-layla:hover p,
+        figure.effect-layla:hover img {
+            -webkit-transition-delay: 0.15s;
+            transition-delay: 0.15s;
+        }
+
 </style>
 @if (Model.Count > 0)
 {
@@ -75,12 +231,43 @@
                             </h2>
                             <div class="picture">
                                 <a href="@(Url.RouteUrl<Category>(new { SeName = item.SeName }))" title="@item.PictureModel.Title">
-                                    <img alt="@item.PictureModel.AlternateText" style="width: 170px; height: 170px; border-radius: 50%" class="" src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
+                                    <img alt="@item.PictureModel.AlternateText" style="width: 170px; height: 170px; border-radius: 50%" class="" 
+                                    src="@item.PictureModel.ImageUrl" title="@item.PictureModel.Title" />
                                 </a>
                             </div>
                         </div>
                     </div>
                 }
+            </div>
+                
+
+            <div class="row">
+                <div class="grid">
+                    <figure class="effect-layla">
+                        <img src="https://giftiti.com/giftiti/public/storage/occasions/2ml7qOQuseUJVOOIaeAqIn9ED4UJvYPgSD89baQi.png" alt="img06" />
+                        <figcaption>
+                            <p>When Layla appears, she brings an eternal summer along.</p>
+                        </figcaption>
+                    </figure>
+                    <figure class="effect-layla">
+                        <img src="https://giftiti.com/giftiti/public/storage/categories/HcGvrrSPCYFcTLHXYIjPFgZwiBasbzoKm5HZr6LI.png" alt="img03" />
+                        <figcaption>
+                            <p>When Layla appears, she brings an eternal summer along.</p>
+                        </figcaption>
+                    </figure>
+                </div>
+             @*    @foreach (var item in Model)
+                {
+                    <div class="item-box card col-12 col-sm-6 col-md-3 col-lg-4 col-xl-3">
+                        <figure class="snip1104">
+                            <img src="@item.PictureModel.ImageUrl" alt="@item.PictureModel.Title" />
+                            <figcaption>
+                                <h2> @item.Name</h2>
+                            </figcaption>
+                            <a href="@(Url.RouteUrl<Category>(new { SeName = item.SeName }))"></a>
+                        </figure>
+                    </div>
+                } *@
             </div>
             @* Add code for gift that brings you happinaess *@
             <div class="row">

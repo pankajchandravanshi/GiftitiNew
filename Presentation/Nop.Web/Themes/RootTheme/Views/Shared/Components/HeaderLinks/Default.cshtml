@@ -71,6 +71,13 @@
                 $('#closeCartButton').on('click', function () {
                     closeOffcanvas();
                 });
+                $('.product-box-add-to-cart-button').on('click', function () {
+                    // Perform add to cart action here
+                    // ...
+
+                    // Open the offcanvas
+                    openOffcanvas();
+                });
             });
             function openOffcanvas() {
                 var offcanvasContainer = $('#offcanvasCartContainer');
@@ -79,29 +86,6 @@
             function closeOffcanvas() {
                 var offcanvasContainer = $('#offcanvasCartContainer');
                 offcanvasContainer.removeClass('open');
-            }
-            function addProductToCart(addToCartLink) {
-                alert("PC")
-                $.ajax({
-                    url: '/ShoppingCar/AddProductToCart_Catalog', // Replace with the actual URL
-                    method: 'POST',
-                    data: { /* provide required data for the method */ },
-                    success: function (response) {
-                        if (response.success) {
-                            // Update cart sections if needed
-                            $('#topCartSection').html(response.updatetopcartsectionhtml);
-                            $('#flyoutCartSection').html(response.updateflyoutcartsectionhtml);
-
-                            // Open the offcanvas
-                            openOffcanvas();
-                        } else {
-                            // Handle error or show a message
-                        }
-                    },
-                    error: function () {
-                        // Handle error
-                    }
-                });
             }
         </script>
     }

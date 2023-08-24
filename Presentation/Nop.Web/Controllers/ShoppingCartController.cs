@@ -39,6 +39,7 @@ using Nop.Web.Framework.Mvc.Routing;
 using Nop.Web.Infrastructure.Cache;
 using Nop.Web.Models.Media;
 using Nop.Web.Models.ShoppingCart;
+using HtmlAgilityPack;
 
 namespace Nop.Web.Controllers
 {
@@ -680,15 +681,47 @@ namespace Nop.Web.Controllers
                             ? await RenderViewComponentToStringAsync(typeof(FlyoutShoppingCartViewComponent))
                             : string.Empty;
 
+
+                        HtmlDocument doc = new HtmlDocument();
+                        doc.LoadHtml(updateflyoutcartsectionhtml);
+
+                        // Use XPath to select the desired element
+                        HtmlNode selectedNode = doc.DocumentNode.SelectSingleNode("//div[@id='flyout-cart' and @class='flyout-cart active']");
+
+                        if (selectedNode != null)
+                        {
+                            string extractedHtml = selectedNode.OuterHtml;
+                            Console.WriteLine(extractedHtml);
+                            updateflyoutcartsectionhtml = extractedHtml;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Element not found");
+                        }
+
+
                         return Json(new
                         {
                             success = true,
-                            message = string.Format(await _localizationService.GetResourceAsync("Products.ProductHasBeenAddedToTheCart.Link"), Url.RouteUrl("ShoppingCart")),
+                          //  message = string.Format(await _localizationService.GetResourceAsync("Products.ProductHasBeenAddedToTheCart.Link"), Url.RouteUrl("ShoppingCart")),
                             updatetopcartsectionhtml,
                             updateflyoutcartsectionhtml
                         });
                     }
             }
+        }
+        static string ExtractHtmlSegment(string html, string startTag, string endTag)
+        {
+            int startIndex = html.IndexOf(startTag);
+            int endIndex = html.LastIndexOf(endTag);
+
+            if (startIndex != -1 && endIndex != -1)
+            {
+                int length = endIndex - startIndex + endTag.Length;
+                return html.Substring(startIndex, length);
+            }
+
+            return null;
         }
 
         //add product to cart using AJAX

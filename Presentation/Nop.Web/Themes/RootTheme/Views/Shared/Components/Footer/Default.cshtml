@@ -1,122 +1,248 @@
-﻿    @model FooterModel
+﻿@model FooterModel
 
 @using Nop.Core
 @using Nop.Core.Domain.Tax
 @using Nop.Core.Domain.Topics
+@* <style>
 
+    .foter-container {
+        height: 442px;
+        background: linear-gradient(96deg, #E6F5F2 0%, #F3EFFF 100%);
+        position: relative;
+    }
+
+    .foter-content {
+        position: relative;
+        text-align: center;
+        color: #16332F;
+        font-size: 16px;
+        font-family: Work Sans;
+        font-weight: 400;
+        line-height: 22.40px;
+        word-wrap: break-word;
+        /* top: 240px; */
+    }
+
+    .foter-title {
+        color: #16332F;
+        font-size: 52px;
+        font-family: Playfair Display;
+        font-weight: 600;
+        line-height: 72.80px;
+        word-wrap: break-word;
+        position: relative;
+        top: 60px;
+    }
+
+    .foter-input {
+        width: 100%;
+        height: 47px;
+        position: relative;
+    }
+
+        .foter-input .foter-input-label {
+            color: #646464;
+            font-size: 16px;
+            font-family: Work Sans;
+            font-weight: 300;
+            line-height: 22.40px;
+            word-wrap: break-word;
+        }
+
+    .foter-input-divider {
+        width: 100%;
+        height: 0.50px;
+        border: 0.50px #16332F solid;
+    }
+
+    .foter-images {
+        position: relative;
+        top: 106px;
+        transform: rotate(-3.26deg);
+        transform-origin: 0 0;
+    }
+
+        .foter-images img {
+            position: relative;
+            transform: rotate(-3.26deg);
+            transform-origin: 0 0;
+        }
+
+            .foter-images img.foter-image-1 {
+                width: 100%;
+                max-width: 180px;
+                height: 180px;
+                border: 1px #F0F1FC solid;
+            }
+
+            .foter-images img.foter-image-2 {
+                width: 80%;
+                max-width: 180px;
+                height: 180px;
+                left: -12px;
+            }
+
+</style> *@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 @inject IWorkContext workContext
 
 <footer class="footer">
     <div class="container">
+    @*     <div class="row foter-container">
+            <div class="col-12 col-sm-12  foter-title">Subscribe to our newsletter</div>
+            <div class="col-lg-5 foter-content">
+                <p style="text-align: left;"> In publishing and graphic design</p>
+                @await Component.InvokeAsync(typeof(NewsletterBoxViewComponent))
+            </div>
+            <div class="col-lg-7 foter-images">
+                <img class="foter-image-1" src="~/images/samples/1.png" alt="Image 1">
+                <img class="foter-image-2" src="~/images/samples/2.png" alt="Image 2">
+            </div> *@
+
+            @*
+
+            <div class="foter-input">
+            <div class="foter-input-label">Email address</div>
+            <div class="foter-input-divider"></div> *@
+        @* </div> *@
+
         <div class="footer-upper">
             <div class="row">
+                <div class="footer-block follow-us col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+                    <div class="title">
+                        <img src="~/images/samples/0000024_giftiti.png" style="width: 100px;" />
+                    </div>
+                    <ul class="list nav flex-column">
+                        <li class="nav-item"> <i class="fa-solid fa-phone-volume"></i>  +1-443-494-4695</li>
+                        <li class="nav-item" style="padding: 14px 4px;">
+                            <i class="fa-solid fa-envelope"></i>  support@giftiti.com
+                        </li>
+                    </ul>
+                    <div class="social">
+                        @await Component.InvokeAsync(typeof(SocialButtonsViewComponent))
+                    </div>
+                   
+                </div>
                 <div class="footer-block information col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
 
                     <div class="title">
-                        <strong>@T("Footer.Support")</strong>
+                        @* <strong>@T("Footer.Support")</strong> *@
+                        <strong class="strongtitle">Support</strong>
                     </div>
                     <ul class="list nav flex-column">
-                        @if (Model.SitemapEnabled && Model.DisplaySitemapFooterItem)
+                        @*  @if (Model.SitemapEnabled && Model.DisplaySitemapFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("Sitemap")">@T("Sitemap")</a></li>
                         }
                         @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn1).ToList())
                         {
-                            <li class="nav-item"><a class="nav-link" href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
                         }
                         @if (Model.DisplayContactUsFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
-                        }
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("ContactUs")">@T("ContactUs")</a></li>
+                        } *@
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("about-us")">About us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("ContactUs")">Contact us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">FAQs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Size Guide</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("shipping-returns")">Shipping & Return</a></li>
                     </ul>
                 </div>
                 <div class="footer-block customer-service col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
                     <div class="title">
-                        <strong>@T("Footer.CustomerService")</strong>
+                        @* <strong>@T("Footer.CustomerService")</strong> *@
+                        <strong class="strongtitle">Shop</strong>
                     </div>
                     <ul class="list nav flex-column">
-                        @if (Model.SearchEnabled && Model.DisplayProductSearchFooterItem)
+                        <li class="nav-item"><a class="nav-link" href="most-purchased-gifts">Most Purchased Gifts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Trending Gifts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Highly Rated Gifts</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Gifts For Couple</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">First Date Gift</a></li>
+
+
+                        @*  @if (Model.SearchEnabled && Model.DisplayProductSearchFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("ProductSearch")">@T("Search")</a> </li>
                         }
                         @if (Model.NewsEnabled && Model.DisplayNewsFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("NewsArchive")">@T("News")</a></li>
                         }
                         @if (Model.BlogEnabled && Model.DisplayBlogFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("Blog")">@T("Blog")</a></li>
                         }
                         @if (Model.ForumEnabled && Model.DisplayForumsFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("Boards")">@T("Forum.Forums")</a></li>
                         }
                         @if (Model.RecentlyViewedProductsEnabled && Model.DisplayRecentlyViewedProductsFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("RecentlyViewedProducts")">@T("Products.RecentlyViewedProducts")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("RecentlyViewedProducts")">@T("Products.RecentlyViewedProducts")</a></li>
                         }
                         @if (Model.CompareProductsEnabled && Model.DisplayCompareProductsFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CompareProducts")">@T("Products.Compare.List")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CompareProducts")">@T("Products.Compare.List")</a></li>
                         }
                         @if (Model.NewProductsEnabled && Model.DisplayNewProductsFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("NewProducts")">@T("Products.NewProducts")</a></li>
                         }
                         @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn2).ToList())
                         {
-                            <li class="nav-item"><a class="nav-link" href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
                         }
                         @if (Model.AllowCustomersToCheckGiftCardBalance)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CheckGiftCardBalance")">@T("CheckGiftCardBalance")</a></li>
-                        }
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CheckGiftCardBalance")">@T("CheckGiftCardBalance")</a></li>
+                        } *@
                     </ul>
                 </div>
                 <div class="footer-block my-account col-12 col-sm-12 col-md-4 col-lg-3 col-xl-3">
                     <div class="title">
-                        <strong>@T("Footer.MyAccount")</strong>
+                        @* <strong>@T("Footer.MyAccount")</strong> *@
+                        <strong class="strongtitle">Company</strong>
                     </div>
                     <ul class="list nav flex-column">
-                        @if (Model.DisplayCustomerInfoFooterItem)
+                        <li class="nav-item"><a class="nav-link" href="#">Our Story</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Careers</a></li>
+                        <li class="nav-item"><a class="nav-link" href="conditions-of-use">Terms & Conditions</a></li>
+                        <li class="nav-item"><a class="nav-link" href="privacy-notice">Privacy & Cookie policy</a></li>
+
+                        @* @if (Model.DisplayCustomerInfoFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CustomerInfo")">@T("Account.MyAccount")</a></li>
                         }
                         @if (Model.DisplayCustomerOrdersFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CustomerOrders")">@T("Account.CustomerOrders")</a></li>
                         }
                         @if (Model.DisplayCustomerAddressesFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CustomerAddresses")">@T("Account.CustomerAddresses")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("CustomerAddresses")">@T("Account.CustomerAddresses")</a></li>
                         }
                         @if (Model.ShoppingCartEnabled && Model.DisplayShoppingCartFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("ShoppingCart")">@T("ShoppingCart")</a></li>
                         }
                         @if (Model.WishlistEnabled && Model.DisplayWishlistFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("Wishlist")">@T("Wishlist")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("Wishlist")">@T("Wishlist")</a></li>
                         }
                         @if (Model.AllowCustomersToApplyForVendorAccount && Model.DisplayApplyVendorAccountFooterItem)
                         {
-                            <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("ApplyVendorAccount")">@T("Vendors.ApplyAccount")</a></li>
+                        <li class="nav-item"><a class="nav-link" href="@Url.RouteUrl("ApplyVendorAccount")">@T("Vendors.ApplyAccount")</a></li>
                         }
                         @foreach (var topic in Model.Topics.Where(x => x.IncludeInFooterColumn3).ToList())
                         {
-                            <li><a class="nav-link" href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
-                        }
+                        <li><a class="nav-link" href="@(Url.RouteUrl<Topic>(new { SeName = topic.SeName }))">@topic.Name</a></li>
+                        } *@
                     </ul>
+                        @await Component.InvokeAsync(typeof(NewsletterBoxViewComponent))
                 </div>
-                <div class="footer-block follow-us col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-                    <div class="social">
-                        <div class="title">
-                            <strong>@T("Footer.FollowUs")</strong>
-                        </div>
-                        @await Component.InvokeAsync(typeof(SocialButtonsViewComponent))
-                    </div>
-                    @await Component.InvokeAsync(typeof(NewsletterBoxViewComponent))
-                </div>
+
             </div>
         </div>
         <div class="footer-lower">
@@ -125,19 +251,27 @@
                 {
                     <div class="footer-powered-by col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                         @*Would you like to remove the "Powered by nopCommerce" link in the bottom of the footer?
-                        Please find more info at https://www.nopcommerce.com/nopcommerce-copyright-removal-key*@
+                    Please find more info at https://www.nopcommerce.com/nopcommerce-copyright-removal-key*@
                         Powered by Pankaj Chandravanshi
                     </div>
                 }
                 <div class="footer-info col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                    <span class="footer-disclaimer">@T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)</span><br />
+                    <div class="credit-cards" style="text-align: center; width: 100%">
+                        <img src="~/icons/icons_0/mastercard.svg" />
+                        <img src="~/icons/icons_0/visa.svg" />
+                        <img src="~/icons/icons_0/amex.svg" />
+                        <img src="~/icons/icons_0/paypal.svg" />
+                        <img src="~/icons/icons_0/maestro.svg" />
+                        <img src="~/icons/icons_0/klarna.svg" />
+                    </div>
+                    @*   <span class="footer-disclaimer">@T("Content.CopyrightNotice", DateTime.Now.Year, Model.StoreName)</span><br />
                     @if (Model.DisplayTaxShippingInfoFooter)
                     {
-                        var inclTax = await workContext.GetTaxDisplayTypeAsync() == TaxDisplayType.IncludingTax;
-                        <span class="footer-tax-shipping">
-                           @T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteTopicUrl("shippinginfo"))
-                        </span>
-                    }
+                    var inclTax = await workContext.GetTaxDisplayTypeAsync() == TaxDisplayType.IncludingTax;
+                    <span class="footer-tax-shipping">
+                    @T(inclTax ? "Footer.TaxShipping.InclTax" : "Footer.TaxShipping.ExclTax", Url.RouteTopicUrl("shippinginfo"))
+                    </span>
+                    }*@
                 </div>
                 @await Component.InvokeAsync(typeof(StoreThemeSelectorViewComponent))
             </div>
